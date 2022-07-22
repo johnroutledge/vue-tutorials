@@ -41,7 +41,7 @@
 
         <ul>
 
-            <li :class="{ 'is-done': isDone }" @click="toggleCompleted(task)" v-for="task in tasks" v-text="task.description"></li>
+            <li :class="{ 'is-done': ! task.completed }" @click="toggleCompleted(task)" v-for="task in tasks" v-text="task.description"></li>
 
         </ul>
 
@@ -50,6 +50,14 @@
         <ul>
 
             <li v-for="task in incompleteTasks" v-text="task.description"></li>
+
+        </ul>
+
+        <h2>Complete Tasks</h2>
+
+        <ul>
+
+            <li v-for="task in completeTasks" v-text="task.description"></li>
 
         </ul>
 
@@ -96,7 +104,7 @@
                 //
                 // message: 'Hello World'
 
-                isDone: false,
+                // isDone: false,
 
             },
 
@@ -112,6 +120,12 @@
 
                     return this.tasks.filter(task => ! task.completed);
 
+                },
+
+                completeTasks() {
+
+                    return this.tasks.filter(task => task.completed);
+
                 }
 
             },
@@ -119,25 +133,25 @@
 
             methods: {
 
-                addName() {
-
-                    this.names.push(this.newName);
-
-                    this.newName = '';
-
-                },
-
-                toggleClass() {
-
-                    this.isLoading = true;
-
-                },
+                // addName() {
+                //
+                //     this.names.push(this.newName);
+                //
+                //     this.newName = '';
+                //
+                // },
+                //
+                // toggleClass() {
+                //
+                //     this.isLoading = true;
+                //
+                // },
 
                 toggleCompleted(task) {
 
-                    this(task).isDone = true;
+                    task.completed = ! task.completed;
 
-                    this.tasks(task).completed = false;
+                    task.isDone = ! task.completed;
 
                 }
 
